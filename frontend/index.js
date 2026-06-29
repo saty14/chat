@@ -57,11 +57,12 @@ if (oauthDomen !== "mysite.com") {
 
     chat.innerHTML = `
         <iframe
-            src="http://127.0.0.1:5500/frontend/chat.html"
+            src="https://chat-gilt-alpha-38.vercel.app/frontend/chat.html"
             style="width:100%;height:100%;border:none;">
         </iframe>
     `;
 
+//   src="http://127.0.0.1:5500/frontend/chat.html"
     button.onclick = () => {
         chat.style.display =
             chat.style.display === "none" ? "block" : "none";
