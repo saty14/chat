@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat Widget</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.chat-container{
+    width:360px;
+    height:580px;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+    display:flex;
+    flex-direction:column;
+}
+
+/* Header */
+
+.chat-header{
+    background:#2563eb;
+    color:white;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:white;
+    color:#2563eb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.header-info h3{
+    font-size:17px;
+}
+
+.header-info p{
+    font-size:13px;
+    opacity:.9;
+}
+
+/* Messages */
+
+.chat-body{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
+    background:#f7f8fc;
+}
+
+.message{
+    max-width:75%;
+    padding:12px 15px;
+    margin-bottom:15px;
+    border-radius:15px;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.bot{
+    background:white;
+    border:1px solid #ddd;
+    border-bottom-left-radius:4px;
+}
+
+.user{
+    background:#2563eb;
+    color:white;
+    margin-left:auto;
+    border-bottom-right-radius:4px;
+}
+
+/* Footer */
+
+.chat-footer{
+    display:flex;
+    gap:10px;
+    padding:15px;
+    border-top:1px solid #ddd;
+    background:white;
+}
+
+.chat-footer input{
+    flex:1;
+    border:1px solid #ddd;
+    border-radius:30px;
+    padding:12px 15px;
+    outline:none;
+    font-size:14px;
+}
+
+.chat-footer button{
+    width:50px;
+    border:none;
+    border-radius:50%;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+    transition:.3s;
+}
+
+.chat-footer button:hover{
+    background:#1749b3;
+}
+
+.time{
+    display:block;
+    font-size:11px;
+    opacity:.6;
+    margin-top:5px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="chat-container">
+
+    <div class="chat-header">
+
+        <div class="avatar">
+            S
+        </div>
+
+        <div class="header-info">
+            <h3>Support Team</h3>
+            <p>🟢 Online</p>
+        </div>
+
+    </div>
+
+    <div class="chat-body">
+
+        <div class="message bot">
+            👋 Hello! Welcome to our website.
+            <span class="time">10:15 AM</span>
+        </div>
+
+        <div class="message bot">
+            How can we help you today?
+            <span class="time">10:15 AM</span>
+        </div>
+
+        <div class="message user">
+            I need information about your services.
+            <span class="time">10:16 AM</span>
+        </div>
+
+    </div>
+
+    <div class="chat-footer">
+
+        <input
+            type="text"
+            placeholder="Type your message..."
+        >
+
+        <button id="sendBtn">
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+const input = document.querySelector("input");
+const chatBody = document.querySelector(".chat-body");
+const sendBtn = document.getElementById("sendBtn");
+
+function sendMessage(){
+
+    const text = input.value.trim();
+
+    if(text==="") return;
+
+    const msg = document.createElement("div");
+
+    msg.className = "message user";
+
+    msg.innerHTML = `
+        ${text}
+        <span class="time">${new Date().toLocaleTimeString([], {
+            hour:'2-digit',
+            minute:'2-digit'
+        })}</span>
+    `;
+
+    chatBody.appendChild(msg);
+
+    input.value="";
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+sendBtn.onclick = sendMessage;
+
+input.addEventListener("keypress",function(e){
+    if(e.key==="Enter"){
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>
